@@ -2,7 +2,8 @@
 
 This is web scraping program to download all your Leetcode submission.
 <br />
-How to use?
+**How to use?** <br />
+You just need 3 things <br />
 - Check your Chrome browser version and download suitable chromedriver from here - https://chromedriver.chromium.org/downloads <br />
 - Put chromedriver, above two ipython notebook file in same folder and provide this as root directory in both the codes. You do not need to create any directory or file except these 3. Required directory/files will be created during runtime. <br />
 - Provide your leetcode username and password in both the codes.
@@ -12,4 +13,4 @@ How to use?
 
 <br />
 Share this with your friends! Happy Leetcoding!! <br />
-Put a star, if you like this project.
+**Put a star, if you like this project.**
