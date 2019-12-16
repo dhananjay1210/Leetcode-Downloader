@@ -8,7 +8,7 @@ How to use?
 - Provide your leetcode username and password in both the codes.
 - Run download_submission_links.ipynb to extract your all submision link. This will be saved in "code_links" folder.
 - Run download_codes.ipynb to download your all codes. They will be saved categotywise(i.e. accepted, wrong answer, TLE etc.) in "codes" folder. Filename is question name of Leetcode problem. <br /> 
- Watch automation on browser, it is fun :)
+- Watch automation on browser, it is fun :)
 
 <br />
 Share this with your friends! Happy Leetcoding!! <br />
