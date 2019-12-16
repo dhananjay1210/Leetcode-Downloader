@@ -1,6 +1,6 @@
 # Leetcode-Downloader
 
-This is web scraping program to download all your Leetcode submission.
+This is web scraping program to download all your Leetcode submission.<br />
 <br />
 **How to use?** <br />
 You just need 3 things <br />
@@ -13,4 +13,4 @@ You just need 3 things <br />
 
 <br />
 Share this with your friends! Happy Leetcoding!! <br />
-**Put a star, if you like this project.**
+Put a star, if you like this project.
