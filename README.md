@@ -4,7 +4,7 @@ This is web scraping program to download all your Leetcode submission.<br />
 <br />
 **How to use?** <br />
 You just need 3 things. <br />
-- Check your Chrome browser version and download suitable chromedriver from here - https://chromedriver.chromium.org/downloads <br />
+- Check your Chrome browser version and download suitable chromedriver from here(8-10 MB file) - https://chromedriver.chromium.org/downloads <br />
 - Download download_submission_links.ipynb (provided above)
 - Download download_codes.ipynb (provided above)
 <br />
