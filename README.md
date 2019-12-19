@@ -1,15 +1,19 @@
 # Leetcode-Downloader
 
 This is web scraping program to download all your Leetcode submission.<br />
+For more details, must read - (medium link) and follow the instructions.<br />
 <br />
 **How to use?** <br />
 You just need 2 things. <br />
-- Check your Chrome browser version and download suitable chromedriver.Just download this driver, do not run this file. Download from here(8-10 MB file) - https://chromedriver.chromium.org/downloads <br />  
+- Check your Chrome browser version and download suitable chromedriver.Just download this driver, do not run this file. Download from here(8-10 MB file) - https://chromedriver.chromium.org/downloads. Unzip the folder. <br />  
 
-- Download leetcode_downloader.py (provided above)
+- All above code files
 <br />
 
-Put chromedriver, code file in same folder. You do not need to create any directory or file except these 3. Required directory/files will be created during runtime. Go through the comments in the codes.<br /> 
+Put chromedriver.exe(windows user) / chromedriver(linux user), code file in same folder. You do not need to create any directory or file. Required directory/files will be created during runtime. Go through the comments in the codes.<br /> 
+<br />
+
+Run linux_install_dependencies.sh or windows_install_dependencies.bat code file <br />
 <br />
 
 Run leetcode_downloader.py and follow the on screen instruction. You will be asked your login credentials.<br />
