@@ -1,7 +1,7 @@
 # Leetcode-Downloader
 
 This is web scraping program to download all your Leetcode submission.<br />
-For more details, must read - (medium link) and follow the instructions.<br />
+For more details, must read - https://medium.com/@dhananjaysonawane01/leetcode-downloader-9fefd1575c72 and follow the instructions.<br />
 <br />
 **How to use?** <br />
 You just need 2 things. <br />
