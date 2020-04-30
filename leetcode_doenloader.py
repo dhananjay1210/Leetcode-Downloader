@@ -506,44 +506,49 @@ except Exception as e:
 
 print("Downloading links of submission...")
 while(True):
-    for row in driver.find_elements_by_xpath("/html/body/div[1]/div[3]/div/div/div/div/div/table/tbody/tr"):
-        third_row_value = row.find_elements(By.TAG_NAME, "td")[2]               # get status column value from table
-        status = third_row_value.find_elements(By.TAG_NAME, "strong")[0].text   # extract status from strong field
-        submission_link = third_row_value.find_elements(By.TAG_NAME, "a")[0].get_attribute('href')
+	for row in driver.find_elements_by_xpath("/html/body/div[1]/div[3]/div/div/div/div/div/table/tbody/tr"):
+		third_row_value = row.find_elements(By.TAG_NAME, "td")[2]               # get status column value from table
+		status = third_row_value.find_elements(By.TAG_NAME, "strong")[0].text   # extract status from strong field
+		submission_link = third_row_value.find_elements(By.TAG_NAME, "a")[0].get_attribute('href')
 
-        if status == "Accepted":
-            with open(code_links + accepted_file,'a') as f:
-                f.writelines(submission_link)
-                f.writelines("\n")
-        elif status == "Wrong Answer":
-            with open(code_links + wrong_answer_file,'a') as f:
-                f.writelines(submission_link)
-                f.writelines("\n")
-        elif status == "Time Limit Exceeded":
-            with open(code_links + tle_file,'a') as f:
-                f.writelines(submission_link)
-                f.writelines("\n")
-        elif status == "Runtime Error":
-            with open(code_links + runtime_error_file,'a') as f:
-                f.writelines(submission_link)
-                f.writelines("\n")
-        elif status == "Compile Error":
-            with open(code_links + compile_error_file,'a') as f:
-                f.writelines(submission_link)
-                f.writelines("\n")
-            
-    try:
-        # Load next submission page
-        next_page = driver.find_elements_by_xpath("/html/body/div[1]/div[3]/div/div/div/div/div/nav/ul/li[2]")[0].find_elements(By.TAG_NAME, "a")[0].get_attribute('href')
-        print("Loading next page...",next_page)
-        driver.get(next_page)
-        # You may increase below timer to 6 if you have slow internet connection.
-        time.sleep(3)
-    except Exception as e:
-        # If this is last submission page, then exit
-        print("Next page not available.")
-        print()
-        break
+		if status == "Accepted":
+			with open(code_links + accepted_file,'a') as f:
+				f.writelines(submission_link)
+				f.writelines("\n")
+				time.sleep(0.01)
+		elif status == "Wrong Answer":
+			with open(code_links + wrong_answer_file,'a') as f:
+				f.writelines(submission_link)
+				f.writelines("\n")
+				time.sleep(0.01)
+		elif status == "Time Limit Exceeded":
+			with open(code_links + tle_file,'a') as f:
+				f.writelines(submission_link)
+				f.writelines("\n")
+				time.sleep(0.01)
+		elif status == "Runtime Error":
+			with open(code_links + runtime_error_file,'a') as f:
+				f.writelines(submission_link)
+				f.writelines("\n")
+				time.sleep(0.01)
+		elif status == "Compile Error":
+			with open(code_links + compile_error_file,'a') as f:
+				f.writelines(submission_link)
+				f.writelines("\n")
+				time.sleep(0.01)
+			
+	try:
+		# Load next submission page
+		next_page = driver.find_elements_by_xpath("/html/body/div[1]/div[3]/div/div/div/div/div/nav/ul/li[2]")[0].find_elements(By.TAG_NAME, "a")[0].get_attribute('href')
+		print("Loading next page...",next_page)
+		driver.get(next_page)
+		# You may increase below timer to 6 if you have slow internet connection.
+		time.sleep(3)
+	except Exception as e:
+		# If this is last submission page, then exit
+		print("Next page not available.")
+		print()
+		break
 print("All submission link saved in folder : ",code_links)
 print()
 
@@ -554,39 +559,40 @@ def remove_invalid(que_name,invd):
 
 print("Downloading your codes...")
 for i in range(len(all_file_list)):
-    file_name = all_file_list[i]
-    file_dir = all_file_dir[i]
-    
-    with open(code_links + file_name) as f:
-        cnt = 0
-        for submission_link in f:
-            sub_id = submission_link.split("/")[-2]
-            #print(sub_id)
-            driver.get(submission_link)
-            
-            # Increase this timer to 8 if you have slow internet connection
-            time.sleep(6)
-            que_name = driver.find_elements_by_xpath("/html/body/div[1]/div[3]/div[1]/div/div[1]/h4/a")[0].text
-            
-            for invd in ['?','/','\\',':','*','<','>','|','"']:
-                if invd in que_name:
-                    que_name = remove_invalid(que_name,invd)
-            code_in_list = []
-            code_lines = driver.find_elements_by_class_name("ace_line")
-            prog_lang = driver.find_elements_by_id("result_language")[0].text.strip()
+	file_name = all_file_list[i]
+	file_dir = all_file_dir[i]
 
-            # create file
-            with open(file_dir + que_name + "_" + str(sub_id) + extention_of[prog_lang] , 'w') as f2:
-                pass
+	with open(code_links + file_name) as f:
+		cnt = 0
+		for submission_link in f:
+			sub_id = submission_link.split("/")[-2]
+			#print(sub_id)
+			driver.get(submission_link)
+			
+			# Increase this timer to 8 if you have slow internet connection
+			time.sleep(6)
+			que_name = driver.find_elements_by_xpath("/html/body/div[1]/div[3]/div[1]/div/div[1]/h4/a")[0].text
+			
+			for invd in ['?','/','\\',':','*','<','>','|','"']:
+				if invd in que_name:
+					que_name = remove_invalid(que_name,invd)
+			code_in_list = []
+			code_lines = driver.find_elements_by_class_name("ace_line")
+			prog_lang = driver.find_elements_by_id("result_language")[0].text.strip()
 
-            # write code
-            #print("Downloading ", que_name + extention_of[prog_lang])
-            with open(file_dir + que_name + "_" + str(sub_id) + extention_of[prog_lang], 'a') as f2:
-                for line in code_lines:#.find_elements(By.TAG_NAME, "div"):
-                    f2.writelines(line.text)
-                    f2.writelines("\n")
-            cnt += 1
-    print(str(cnt) + " " + file_name.split('.')[0] + " downloaded." )
+			# create file
+			with open(file_dir + que_name + "_" + str(sub_id) + extention_of[prog_lang] , 'w') as f2:
+				pass
+
+			# write code
+			#print("Downloading ", que_name + extention_of[prog_lang])
+			with open(file_dir + que_name + "_" + str(sub_id) + extention_of[prog_lang], 'a') as f2:
+				for line in code_lines:#.find_elements(By.TAG_NAME, "div"):
+					f2.writelines(line.text)
+					f2.writelines("\n")
+					time.sleep(0.01)
+			cnt += 1
+	print(str(cnt) + " " + file_name.split('.')[0] + " downloaded." )
 
 print()
 print("All codes downloaded in folder : ",code)	 
