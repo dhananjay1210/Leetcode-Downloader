@@ -569,8 +569,8 @@ for i in range(len(all_file_list)):
 			#print(sub_id)
 			driver.get(submission_link)
 			
-			# Increase this timer to 8 if you have slow internet connection
-			time.sleep(6)
+			# Increase this timer to 15 if you have slow internet connection
+			time.sleep(10)
 			que_name = driver.find_elements_by_xpath("/html/body/div[1]/div[3]/div[1]/div/div[1]/h4/a")[0].text
 			
 			for invd in ['?','/','\\',':','*','<','>','|','"']:
