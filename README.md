@@ -17,6 +17,9 @@ Run linux_install_dependencies.sh or windows_install_dependencies.bat code file 
 <br />
 
 Run leetcode_downloader.py and follow the on screen instruction. You will be asked your login credentials.<br />
+(You might face warning/error after running "leetcode_downloader.py" :<br />
+ERROR:ssl_client_socket_impl.cc(941)] handshake failed; returned -1, SSL error code 1, net_error -200<br />
+You can **ignore** this warning/error )<br />
 <br />
 
 After successful execution : <br />
