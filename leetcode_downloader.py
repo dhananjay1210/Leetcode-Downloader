@@ -495,7 +495,7 @@ print("Webpage for all submission loaded.")
 print()
 
 try:
-	if driver.find_element_by_xpath("/html/body/div[1]/div[3]/div/div/div/h4").text:
+	if driver.find_element_by_xpath("/html/body/div[1]/div[4]/div/div/div/h4").text:
 		print("Submission links loaded successfully...")
 		print()
 except Exception as e:
@@ -506,7 +506,7 @@ except Exception as e:
 
 print("Downloading links of submission...")
 while(True):
-	for row in driver.find_elements_by_xpath("/html/body/div[1]/div[3]/div/div/div/div/div/table/tbody/tr"):
+	for row in driver.find_elements_by_xpath("/html/body/div[1]/div[4]/div/div/div/div/div/table/tbody/tr"):
 		third_row_value = row.find_elements(By.TAG_NAME, "td")[2]               # get status column value from table
 		status = third_row_value.find_elements(By.TAG_NAME, "strong")[0].text   # extract status from strong field
 		submission_link = third_row_value.find_elements(By.TAG_NAME, "a")[0].get_attribute('href')
@@ -539,7 +539,7 @@ while(True):
 			
 	try:
 		# Load next submission page
-		next_page = driver.find_elements_by_xpath("/html/body/div[1]/div[3]/div/div/div/div/div/nav/ul/li[2]")[0].find_elements(By.TAG_NAME, "a")[0].get_attribute('href')
+		next_page = driver.find_elements_by_xpath("/html/body/div[1]/div[4]/div/div/div/div/div/nav/ul/li[2]")[0].find_elements(By.TAG_NAME, "a")[0].get_attribute('href')
 		print("Loading next page...",next_page)
 		driver.get(next_page)
 		# You may increase below timer to 6 if you have slow internet connection.
@@ -571,7 +571,7 @@ for i in range(len(all_file_list)):
 			
 			# Increase this timer to 15 if you have slow internet connection
 			time.sleep(10)
-			que_name = driver.find_elements_by_xpath("/html/body/div[1]/div[3]/div[1]/div/div[1]/h4/a")[0].text
+			que_name = driver.find_elements_by_xpath("/html/body/div[1]/div[4]/div[1]/div/div[1]/h4/a")[0].text
 			
 			for invd in ['?','/','\\',':','*','<','>','|','"']:
 				if invd in que_name:
