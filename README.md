@@ -20,6 +20,10 @@ ERROR:ssl_client_socket_impl.cc(941)] handshake failed; returned -1, SSL error c
 You can **ignore** this warning/error )<br />
 <br />
 
+Since Leetcode website gets updated after few months of interval, you might face WebDriver Errors. Please do not hesitate to raise an issue with error screenshot. This will help me to update the codebase in efficient manner.
+<br /> 
+<br />
+
 After successful execution : <br />
 Your submision link will be saved in "code_links" folder. <br />
 All your codes will be saved categotywise(i.e. accepted, wrong answer, TLE etc.) in "codes" folder. Filename is question name of Leetcode problem + your leetcode submission id. <br /> 
