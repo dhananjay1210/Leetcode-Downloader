@@ -10,13 +10,11 @@ You just need 2 things. <br />
 - All above code files
 <br />
 
-Put chromedriver.exe(windows user) / chromedriver(linux user), code file in same folder. You do not need to create any directory or file. Required directory/files will be created during runtime. Go through the comments in the codes.<br /> 
+Put chromedriver.exe(windows user) / chromedriver(linux or mac user), code files in **SAME** folder. You do not need to create any directory or file. Required directory/files will be created during runtime. Go through the comments in the codes.<br /> 
 <br />
 
-Run linux_install_dependencies.sh or windows_install_dependencies.bat code file <br />
-<br />
-
-Run leetcode_downloader.py and follow the on screen instruction. You will be asked your login credentials.<br />
+Run linux_autorunner.sh or windows_autorunner.bat code file. Windows user might get warning pop-up, click on "More Info" and then "Run Anyway" button. <br>
+Follow the on screen instruction. You will be asked for your login credentials.<br />
 (You might face warning/error after running "leetcode_downloader.py" :<br />
 ERROR:ssl_client_socket_impl.cc(941)] handshake failed; returned -1, SSL error code 1, net_error -200<br />
 You can **ignore** this warning/error )<br />
