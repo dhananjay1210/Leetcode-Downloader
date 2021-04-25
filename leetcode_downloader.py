@@ -1,5 +1,4 @@
 # Imports
-from bs4 import BeautifulSoup
 import re
 import os
 from time import sleep
@@ -31,18 +30,14 @@ print()
 print()
 
 # Input user's root path
-print("Root directory is a path where this code file along with chromedriver is present")
-print("e.g. For windows system     : G:\\Leetcode\\Mycodes")
-print("e.g. For linux/mac system   : /home/Leetcode/Mycodes")
-print("Enter your root directory : ",end = "")
-root_path = input().strip()
+root_path = os.getcwd()
 print()
 
 # Input OS
 user_os = ""
 retry = 0
-while (user_os not in ["windows","linux"]) and retry < 5:
-	print("Enter your operating syatem (windows/linux) : ",end = "")
+while (user_os not in ["windows","linux", "mac"]) and retry < 5:
+	print("Enter your operating syatem (windows/linux/mac) : ",end = "")
 	user_os = input().strip().lower()
 	retry += 1
 if retry == 5:
@@ -55,12 +50,9 @@ print()
 
 # Create directories
 print("Creating necessary directories/files... ")
-os_dir_appender = {"windows" : '\\', "linux" : '/', "mac" : "/"}
-if root_path[-1] not in os_dir_appender.values():
-	root_path += os_dir_appender[user_os]
-code = root_path + "codes" + os_dir_appender[user_os]                                            # Directory where your leetcode submission will be saved
-code_links = root_path + "code_links" + os_dir_appender[user_os]                                 # Directory where your leetcode submission links will be saved
-download_default_directory = root_path + "chrome_download" + os_dir_appender[user_os]            # Default Directory for chrome downloads
+code = os.path.join(root_path, "codes")				                                             # Directory where your leetcode submission will be saved
+code_links = os.path.join(root_path, "code_links")				                                 # Directory where your leetcode submission links will be saved
+download_default_directory = os.path.join(root_path, "chrome_download")				            # Default Directory for chrome downloads
 accepted_file = "accepted_code_link.txt"
 wrong_answer_file = "wrong_answer_code_link.txt"
 tle_file = "tle_code_link.txt"
@@ -68,11 +60,11 @@ runtime_error_file = "runtime_error_code_link.txt"
 compile_error_file = "compile_error_code_link.txt"
 all_file_list = [accepted_file, wrong_answer_file, tle_file, runtime_error_file, compile_error_file]
 
-accepted_dir = code + "accepted_codes" + os_dir_appender[user_os]
-wrong_answer_dir = code + "wrong_answer_codes" + os_dir_appender[user_os]
-tle_dir = code + "tle_codes" + os_dir_appender[user_os]
-runtime_error_dir = code + "runtime_error_codes" + os_dir_appender[user_os]
-compile_error_dir = code + "compile_error_codes" + os_dir_appender[user_os]
+accepted_dir = os.path.join(code, "accepted_codes")
+wrong_answer_dir = os.path.join(code, "wrong_answer_codes")
+tle_dir = os.path.join(code, "tle_codes") 
+runtime_error_dir = os.path.join(code, "runtime_error_codes") 
+compile_error_dir = os.path.join(code, "compile_error_codes")
 all_file_dir = [accepted_dir, wrong_answer_dir, tle_dir, runtime_error_dir, compile_error_dir]
 extention_of = {"cpp" : ".cpp",
                 "java" : ".java",
@@ -138,15 +130,15 @@ except OSError as e:
         raise
 
 
-with open(code_links + accepted_file,'w') as f:
+with open(os.path.join(code_links, accepted_file),'w') as f:
     pass
-with open(code_links + wrong_answer_file,'w') as f:
+with open(os.path.join(code_links, wrong_answer_file),'w') as f:
     pass
-with open(code_links + tle_file,'w') as f:
+with open(os.path.join(code_links, tle_file),'w') as f:
     pass
-with open(code_links + runtime_error_file,'w') as f:
+with open(os.path.join(code_links, runtime_error_file),'w') as f:
     pass
-with open(code_links + compile_error_file,'w') as f:
+with open(os.path.join(code_links, compile_error_file),'w') as f:
     pass
       
 print("Created necessary directories/files.")
@@ -186,9 +178,9 @@ chromeOptions = webdriver.ChromeOptions()
 prefs = {"download.default_directory" : download_default_directory,"safebrowsing.enabled": "false"}
 chromeOptions.add_experimental_option("prefs",prefs)
 if user_os == "windows":
-	chromedriver = root_path + "chromedriver.exe"
+	chromedriver = "chromedriver.exe"
 else:
-	chromedriver = root_path + "chromedriver"
+	chromedriver = "chromedriver"
 driver = webdriver.Chrome(executable_path=chromedriver, chrome_options=chromeOptions)
 
 
@@ -222,7 +214,7 @@ if acc_type == "leetcode":
 	driver.find_element_by_name("password").send_keys(pwd)
 	time.sleep(1)
 
-	driver.find_element_by_xpath("//button[@class='btn__2FMG fancy-btn__CYhs primary__3S2m light__3zR9 btn__1eiM btn-md__3VAX ']").click()
+	driver.find_element_by_id("signin_btn").click()
 	# You may increase below timer to 10 if you have slow internet connection.
 	time.sleep(5)
 	
@@ -231,7 +223,7 @@ if acc_type == "leetcode":
 		if "CAPTCHA" in err_msg:
 			print("If captcha issue persist then connect to the VPN and rerun the code")
 			print("                              OR                                   ")
-			print("ENTER THE CAPTCHA AND THEN PRESS 'y' KEY FOLLOWED BY ENTER TO PROCEED : ",end = "")
+			print("ENTER THE CAPTCHA, CLICK ON SIGN-IN BUTTON. AFTER THIS, PRESS 'y' KEY HERE FOLLOWED BY ENTER TO PROCEED ('y'/'Y'): ",end = "")
 			input()
 			print()
 			driver.find_element_by_xpath("//button[@class='btn__2FMG fancy-btn__CYhs primary__3S2m light__3zR9 btn__1eiM btn-md__3VAX ']").click()
@@ -495,7 +487,7 @@ print("Webpage for all submission loaded.")
 print()
 
 try:
-	if driver.find_element_by_xpath("/html/body/div[1]/div[4]/div/div/div/h4").text:
+	if driver.find_element_by_id("submission-list-app"):
 		print("Submission links loaded successfully...")
 		print()
 except Exception as e:
@@ -506,40 +498,42 @@ except Exception as e:
 
 print("Downloading links of submission...")
 while(True):
-	for row in driver.find_elements_by_xpath("/html/body/div[1]/div[4]/div/div/div/div/div/table/tbody/tr"):
+	tbody = driver.find_element_by_id("submission-list-app").find_element(By.TAG_NAME, "tbody")
+	all_tr = tbody.find_elements(By.TAG_NAME, "tr")
+	for row in all_tr:
 		third_row_value = row.find_elements(By.TAG_NAME, "td")[2]               # get status column value from table
 		status = third_row_value.find_elements(By.TAG_NAME, "strong")[0].text   # extract status from strong field
 		submission_link = third_row_value.find_elements(By.TAG_NAME, "a")[0].get_attribute('href')
 
 		if status == "Accepted":
-			with open(code_links + accepted_file,'a') as f:
+			with open(os.path.join(code_links, accepted_file),'a') as f:
 				f.writelines(submission_link)
 				f.writelines("\n")
 				time.sleep(0.01)
 		elif status == "Wrong Answer":
-			with open(code_links + wrong_answer_file,'a') as f:
+			with open(os.path.join(code_links, wrong_answer_file),'a') as f:
 				f.writelines(submission_link)
 				f.writelines("\n")
 				time.sleep(0.01)
 		elif status == "Time Limit Exceeded":
-			with open(code_links + tle_file,'a') as f:
+			with open(os.path.join(code_links, tle_file),'a') as f:
 				f.writelines(submission_link)
 				f.writelines("\n")
 				time.sleep(0.01)
 		elif status == "Runtime Error":
-			with open(code_links + runtime_error_file,'a') as f:
+			with open(os.path.join(code_links, runtime_error_file),'a') as f:
 				f.writelines(submission_link)
 				f.writelines("\n")
 				time.sleep(0.01)
 		elif status == "Compile Error":
-			with open(code_links + compile_error_file,'a') as f:
+			with open(os.path.join(code_links, compile_error_file),'a') as f:
 				f.writelines(submission_link)
 				f.writelines("\n")
 				time.sleep(0.01)
 			
 	try:
 		# Load next submission page
-		next_page = driver.find_elements_by_xpath("/html/body/div[1]/div[4]/div/div/div/div/div/nav/ul/li[2]")[0].find_elements(By.TAG_NAME, "a")[0].get_attribute('href')
+		next_page = driver.find_elements_by_class_name("next")[0].find_element(By.TAG_NAME, "a").get_attribute('href')
 		print("Loading next page...",next_page)
 		driver.get(next_page)
 		# You may increase below timer to 6 if you have slow internet connection.
@@ -562,7 +556,7 @@ for i in range(len(all_file_list)):
 	file_name = all_file_list[i]
 	file_dir = all_file_dir[i]
 
-	with open(code_links + file_name) as f:
+	with open(os.path.join(code_links, file_name)) as f:
 		cnt = 0
 		for submission_link in f:
 			sub_id = submission_link.split("/")[-2]
@@ -571,7 +565,7 @@ for i in range(len(all_file_list)):
 			
 			# Increase this timer to 15 if you have slow internet connection
 			time.sleep(10)
-			que_name = driver.find_elements_by_xpath("/html/body/div[1]/div[4]/div[1]/div/div[1]/h4/a")[0].text
+			que_name = driver.find_element(By.TAG_NAME, "h4").find_element(By.TAG_NAME, "a").text
 			
 			for invd in ['?','/','\\',':','*','<','>','|','"']:
 				if invd in que_name:
@@ -581,12 +575,12 @@ for i in range(len(all_file_list)):
 			prog_lang = driver.find_elements_by_id("result_language")[0].text.strip()
 
 			# create file
-			with open(file_dir + que_name + "_" + str(sub_id) + extention_of[prog_lang] , 'w') as f2:
+			with open(os.path.join(file_dir, que_name + "_" + str(sub_id) + extention_of[prog_lang]), 'w') as f2:
 				pass
 
 			# write code
 			#print("Downloading ", que_name + extention_of[prog_lang])
-			with open(file_dir + que_name + "_" + str(sub_id) + extention_of[prog_lang], 'a') as f2:
+			with open(os.path.join(file_dir, que_name + "_" + str(sub_id) + extention_of[prog_lang]), 'a') as f2:
 				for line in code_lines:#.find_elements(By.TAG_NAME, "div"):
 					f2.writelines(line.text)
 					f2.writelines("\n")
