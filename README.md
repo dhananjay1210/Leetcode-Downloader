@@ -1,4 +1,4 @@
-# My Instructions
+# Refined Instructions
 1. Download ChromeDriver, and put it in the repo folder.
 2. Run leetcode_downloader.py under the repo folder with Python 3.
 3. Run convert.py under the repo folder with Python 3.
