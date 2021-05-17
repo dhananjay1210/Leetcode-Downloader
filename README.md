@@ -5,7 +5,7 @@
 PATH=$PATH:`realpath .` python leetcode_downloader.py
 ```
 3. Run convert.py under the repo folder with Python 3.
-4. Find the results in converted under the repo folder.
+4. Find the latest accepted code for each problem in converted under the repo folder.
 # Leetcode-Downloader
 
 This is web scraping program to download all your Leetcode submission.<br />
