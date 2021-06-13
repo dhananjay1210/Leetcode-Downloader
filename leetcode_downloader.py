@@ -79,7 +79,8 @@ extention_of = {"cpp" : ".cpp",
                 "scala" : ".scala",
                 "kotlin" : ".kt",
                 "rust" : ".rs",
-                "mysql" : ".sql"}
+                "mysql" : ".sql",
+                "bash" : ".sh"}
 
 try:
     os.makedirs(code)
