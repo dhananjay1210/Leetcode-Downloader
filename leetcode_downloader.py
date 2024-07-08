@@ -182,8 +182,9 @@ if user_os == "windows":
 	chromedriver = "chromedriver.exe"
 else:
 	chromedriver = "chromedriver"
-driver = webdriver.Chrome(executable_path=chromedriver, chrome_options=chromeOptions)
 
+option = webdriver.ChromeOptions()
+driver = webdriver.Chrome(options = option)
 
 #user agent configurations
 user_agent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)    Chrome/41.0.2228.0 Safari/537.36'
@@ -198,24 +199,24 @@ print()
 
 # Login to leetcode
 if acc_type == "leetcode":
-	already_present = driver.find_element_by_name("login").get_attribute('value')
+	already_present = driver.find_element("name","login").get_attribute('value')
 	for i in range(len(already_present)+1):
-		driver.find_element_by_name("login").send_keys(Keys.BACKSPACE);
+		driver.find_element("name","login").send_keys(Keys.BACKSPACE);
 
 	# user name will be entered
-	driver.find_element_by_name("login").send_keys(username)
+	driver.find_element("name","login").send_keys(username)
 	time.sleep(1)
 
 	# To Clear password field
-	already_present = driver.find_element_by_name("password").get_attribute('value')
+	already_present = driver.find_element("name", "password").get_attribute('value')
 	for i in range(len(already_present)+1):
-		driver.find_element_by_name("password").send_keys(Keys.BACKSPACE);
+		driver.find_element("name","password").send_keys(Keys.BACKSPACE);
 
 	# password will be entered
-	driver.find_element_by_name("password").send_keys(pwd)
+	driver.find_element("name","password").send_keys(pwd)
 	time.sleep(1)
 
-	driver.find_element_by_id("signin_btn").click()
+	driver.find_element("id","signin_btn").click()
 	# You may increase below timer to 10 if you have slow internet connection.
 	time.sleep(5)
 	
@@ -488,7 +489,7 @@ print("Webpage for all submission loaded.")
 print()
 
 try:
-	if driver.find_element_by_id("submission-list-app"):
+	if driver.find_element("id","submission-list-app"):
 		print("Submission links loaded successfully...")
 		print()
 except Exception as e:
@@ -499,7 +500,7 @@ except Exception as e:
 
 print("Downloading links of submission...")
 while(True):
-	tbody = driver.find_element_by_id("submission-list-app").find_element(By.TAG_NAME, "tbody")
+	tbody = driver.find_element("id","submission-list-app").find_element(By.TAG_NAME, "tbody")
 	all_tr = tbody.find_elements(By.TAG_NAME, "tr")
 	for row in all_tr:
 		third_row_value = row.find_elements(By.TAG_NAME, "td")[2]               # get status column value from table
